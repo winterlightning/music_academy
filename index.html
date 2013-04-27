@@ -103,18 +103,18 @@
 
 	<link rel="stylesheet" href="css/fontello.css">
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
 	<link rel="stylesheet" href="css/jpanel.css">
+	
+	<!-- qwerty hancock -->
+	<script src="qwerty-hancock.js"></script>
+    <script src="keyboard/raphael-min.js"></script>
 	
 	<script src="fastclick.js"></script>
 	<script src="app.js"></script>
 
 	<script src="multi.js"></script>
-	
-	<!-- qwerty hancock -->
-	<script src="keyboard/qwerty-hancock.js"></script>
-    <script src="keyboard/raphael-min.js"></script>
 	
   </head>
   <body>
@@ -134,14 +134,14 @@
 	    <i class="icon-menu" style="font-size: 25px;"></i> 
 	  </a>
 	  <h1 class="title">Music Academy</h1>
-	  <a class="button" href="#addModal" style="padding-top: 5px;">
-	    <i class="icon-plus" style="font-size: 25px;"></i> 
-	  </a>
+
 	</header>
 
 	<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 	<div class="content" style="background-image: url('back.png'); background-size: cover; background-position: center center;">
-		
+		<nav class="bar-tab" style="height: 200px; width: 100%">
+			<div id="keyboard" style="background-color: #222; font-size: 0px; margin: 0px auto; text-align: center; "></div>
+		</nav>
 	</div>
 
 	<!-- modal for adding -->
@@ -157,7 +157,7 @@
 	  </header>
 	  
 	  <div class="content">
-		<div id="keyboard"></div>
+		
 	  </div>
 	</div>
 	
@@ -181,48 +181,6 @@
 	  </div>
 		
 	</div>
-
-
-
-    <script>
-        $(function () {
-            // function (id, width, height, octaves, startNote, whiteNotesColour, blackNotesColour, hoverColour) 
-
-            var settings = {
-                id: 'keyboard',
-                height: 150,
-                startNote: 'A3',
-                whiteNotesColour: 'white',
-                blackNotesColour: 'black',
-                hoverColour: 'yellow'
-            };
-
-            var keyboard = qwertyHancock(settings);
-
-            var context = new webkitAudioContext(),
-                nodes = [];
-
-            keyboard.keyDown(function (note, frequency) {
-                var oscillator = context.createOscillator(),
-                    gainNode = context.createGainNode();
-
-                oscillator.type = 1;
-                oscillator.frequency.value = frequency;
-                gainNode.gain.value = 0.3;
-                oscillator.connect(gainNode);
-                gainNode.connect(context.destination); 
-                nodes.push(oscillator);
-            });
-
-            keyboard.keyUp(function (note, frequency) {
-                for (var i = 0; i < nodes.length; i++) {
-                    if (Math.round(nodes[i].frequency.value) === Math.round(frequency)) {
-                        nodes[i].disconnect();
-                    }
-                }
-            });
-        });
-    </script>
 
   </body>
 </html>

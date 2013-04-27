@@ -2,12 +2,55 @@
 (function() {
 
   $(function() {
+    var context, keyboard, nodes, settings;
     new FastClick(document.body);
-    return Nimbus.Auth.set_app_ready(function() {
+    Nimbus.Auth.set_app_ready(function() {
       console.log("app ready called");
       if (Nimbus.Auth.authorized()) {
         return $("#loginModal").removeClass("active");
       }
+    });
+    settings = {
+      id: "keyboard",
+      width: 900,
+      height: 200,
+      startNote: "C4",
+      whiteNotesColour: "white",
+      blackNotesColour: "black",
+      hoverColour: "yellow",
+      keyboardLayout: "en"
+    };
+    keyboard = qwertyHancock(settings);
+    context = new webkitAudioContext();
+    nodes = [];
+    keyboard.keyDown(function(note, frequency) {
+      var gainNode, oscillator;
+      oscillator = context.createOscillator();
+      gainNode = context.createGainNode();
+      oscillator.type = 1;
+      oscillator.frequency.value = frequency;
+      gainNode.gain.value = 0.3;
+      oscillator.connect(gainNode);
+      if (typeof oscillator.noteOn !== "undefined") {
+        oscillator.noteOn(0);
+      }
+      gainNode.connect(context.destination);
+      return nodes.push(oscillator);
+    });
+    return keyboard.keyUp(function(note, frequency) {
+      var i, _results;
+      i = 0;
+      _results = [];
+      while (i < nodes.length) {
+        if (Math.round(nodes[i].frequency.value) === Math.round(frequency)) {
+          if (typeof nodes[i].noteOff !== "undefined") {
+            nodes[i].noteOff(0);
+          }
+          nodes[i].disconnect();
+        }
+        _results.push(i++);
+      }
+      return _results;
     });
   });
 
