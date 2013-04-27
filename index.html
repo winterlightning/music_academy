@@ -112,6 +112,10 @@
 
 	<script src="multi.js"></script>
 	
+	<!-- qwerty hancock -->
+	<script src="keyboard/qwerty-hancock.js"></script>
+    <script src="keyboard/raphael-min.js"></script>
+	
   </head>
   <body>
   
@@ -153,33 +157,9 @@
 	  </header>
 	  
 	  <div class="content">
-		<form style="height: 100%; overflow: hidden">
-		  <textarea id="writearea" onfocus="window.scrollTo(0, 0);" placeholder="Enter your entry here and hit check to save"></textarea>
-		</form>
+		<div id="keyboard"></div>
 	  </div>
 	</div>
-
-	<!-- modal for editing -->
-	<div id="editModal" class="modal">
-	  <header class="bar-title">
-		<a class="button" onclick="save_entry()" style="padding-top: 5px;">
-			<i class="icon-ok" style="font-size: 20px;"></i> 
-		</a>
-		<a class="button" onclick="delete_entry()" style="padding-top: 5px;">
-			<i class="icon-trash" style="font-size: 17px;"></i> 
-		</a>			  	
-	    <h1 class="title">Edit Entry</h1>
-		<a class="button" href="#editModal" style="padding-top: 7px;">
-			<i class="icon-cancel-2" style="font-size: 20px;"></i> 
-		</a>
-	  </header>
-	  
-	  <div class="content">
-		<form style="height: 100%; overflow: hidden">
-		  <textarea id="editarea" style="font-size: 20px; height: 300px; margin-top:0px; border-radius: 0px;" placeholder="Enter your entry here and hit check to save"></textarea>
-		</form>
-	  </div>
-	</div>	
 	
 
 	<!-- modal for login -->
@@ -203,9 +183,46 @@
 	</div>
 
 
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="lib/twitter-text-1.5.0.js" type="text/javascript" charset="utf-8"></script>
-	<script src="lib/jquery.timeago.js" type="text/javascript" charset="utf-8"></script>
+
+    <script>
+        $(function () {
+            // function (id, width, height, octaves, startNote, whiteNotesColour, blackNotesColour, hoverColour) 
+
+            var settings = {
+                id: 'keyboard',
+                height: 150,
+                startNote: 'A3',
+                whiteNotesColour: 'white',
+                blackNotesColour: 'black',
+                hoverColour: 'yellow'
+            };
+
+            var keyboard = qwertyHancock(settings);
+
+            var context = new webkitAudioContext(),
+                nodes = [];
+
+            keyboard.keyDown(function (note, frequency) {
+                var oscillator = context.createOscillator(),
+                    gainNode = context.createGainNode();
+
+                oscillator.type = 1;
+                oscillator.frequency.value = frequency;
+                gainNode.gain.value = 0.3;
+                oscillator.connect(gainNode);
+                gainNode.connect(context.destination); 
+                nodes.push(oscillator);
+            });
+
+            keyboard.keyUp(function (note, frequency) {
+                for (var i = 0; i < nodes.length; i++) {
+                    if (Math.round(nodes[i].frequency.value) === Math.round(frequency)) {
+                        nodes[i].disconnect();
+                    }
+                }
+            });
+        });
+    </script>
 
   </body>
 </html>
