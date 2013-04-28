@@ -125,7 +125,9 @@
 		<ul>
 			<!-- <li><input id="filter_search" type="search" placeholder="Filter"></li> -->
 			<li><a onclick="window.log_out()"><i class="icon-logout" style="font-size: 16px;"></i>Logout</a></li>
-			<li><a onclick="window.log_out()">Call Me Maybe</a></li>
+			<li><a onclick="window.construct_instruction(window.current_song)">Tutorial</a></li>
+			<li><a onclick="window.construct_instruction(window.call_me_baby)">Call Me Maybe</a></li>
+			<li><a onclick="window.construct_instruction(window.skrillex)">Don't Stop Believing</a></li>
 			<!-- <li><a href="#usage"><i class="icon-arrows-ccw" style="font-size: 16px;"></i>Sync</a></li> -->
 			<!-- <li><a href="#inner-workings">Filter</a></li> -->
 		</ul>
@@ -144,7 +146,6 @@
 		
 		
 		<div id="instruction" style="width: 600px; margin: 0px auto; display:block; margin-top: 100px;">
-			<h1 id="song_title" style="color: rgba(255,255,255,0.7); font-weight: lighter; margin-left: 20px; margin-bottom: 10px;"></h1>
 		</div>
 		<nav class="bar-tab" style="height: 200px; width: 100%">
 			<div id="keyboard" style="background-color: #222; font-size: 0px; margin: 0px auto; text-align: center; "></div>

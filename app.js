@@ -82,7 +82,7 @@
 
   window.current_song = {
     "title": "Tutorial",
-    "song": ["C3", "D3", "E3", "F3", "G3"]
+    "song": ["C3", "D3", "E3", "F3", "G3", "break", "G3", "F3", "E3", "D3", "C3", "break", "C3", "C3", "G3", "G3", "A3", "A3", "G3", "break", "F3", "F3", "E3", "E3", "D3", "D3", "C3"]
   };
 
   window.call_me_baby = {
@@ -90,9 +90,16 @@
     "song": ["B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", "B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", "B3", "B3", "B3", "B3", "B3", "A3", "A3", "break", "A3", "A3", "G3", "G3", "D4", "B3"]
   };
 
+  window.skrillex = {
+    "title": "Don't Stop Believing",
+    "song": ["B3", "G3", "A3", "A3", "B3", "G3", "G3", "G3", "G3", "D4", "D4", "B3", "A3", "break", "D4", "B3", "G3", "A3", "A3", "B3", "A3", "G3", "A3", "B3", "G3"]
+  };
+
   window.construct_instruction = function(total) {
     var a, counter, counter2, k, key, match, s, x, _i, _len, _ref, _results;
-    $("#song_title").text(total.title);
+    $("#instruction").html("");
+    x = "<h1 id=\"song_title\" style=\"color: rgba(255,255,255,0.7); font-weight: lighter; margin-left: 20px; margin-bottom: 10px;\">" + total.title + "</h1>";
+    $("#instruction").append(x);
     window.live = total.song;
     window.current = 0;
     window.current2 = 0;
