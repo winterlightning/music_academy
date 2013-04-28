@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Music Academy</title>
+    <title>Musically</title>
 
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -116,6 +116,8 @@
 
 	<script src="multi.js"></script>
 	
+	<link rel="stylesheet" href="css/musically.css">
+	
   </head>
   <body>
   
@@ -133,12 +135,15 @@
 	  <a class="button menu-trigger" id="menu_button" onclick="window.toggle_slide()">
 	    <i class="icon-menu" style="font-size: 25px;"></i> 
 	  </a>
-	  <h1 class="title">Music Academy</h1>
+	  <h1 class="title">Musically</h1>
 
 	</header>
 
 	<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 	<div class="content" style="background-image: url('back.png'); background-size: cover; background-position: center center;">
+		
+		<div id="instruction" style="width: 600px; margin: 0px auto; display:block; margin-top: 200px;">
+		</div>
 		<nav class="bar-tab" style="height: 200px; width: 100%">
 			<div id="keyboard" style="background-color: #222; font-size: 0px; margin: 0px auto; text-align: center; "></div>
 		</nav>

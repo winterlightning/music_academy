@@ -1,0 +1,25 @@
+.note {
+	text-align: center;
+	width: 100px;
+	margin: 0px;	
+	float: left;
+	margin-left: 10px;
+}
+
+.what {
+	font-size: 70px;
+	color: rgba(255,255,255,0.7);
+}
+
+.key {
+	font-size: 20px;
+	color: rgba(255,255,255,0.7);
+}
+
+.done .what {
+	color: rgba(255,255,255,0.1);
+}
+
+.done .key {
+	color: rgba(255,255,255,0.1);
+}

@@ -10,11 +10,12 @@
         return $("#loginModal").removeClass("active");
       }
     });
+    window.construct_instruction(window.current_song);
     settings = {
       id: "keyboard",
       width: 900,
       height: 200,
-      startNote: "C4",
+      startNote: "C3",
       whiteNotesColour: "white",
       blackNotesColour: "black",
       hoverColour: "yellow",
@@ -25,6 +26,7 @@
     nodes = [];
     keyboard.keyDown(function(note, frequency) {
       var gainNode, oscillator;
+      console.log("note", note, "frequency", frequency);
       oscillator = context.createOscillator();
       gainNode = context.createGainNode();
       oscillator.type = 1;
@@ -38,7 +40,14 @@
       return nodes.push(oscillator);
     });
     return keyboard.keyUp(function(note, frequency) {
-      var i, _results;
+      var i, name, _results;
+      console.log("note", note, "frequency", frequency);
+      if (note === window.current_song[window.current]) {
+        window.current = window.current + 1;
+        console.log("match", window.current);
+        name = "#n" + (window.current - 1);
+        $(name).addClass("done");
+      }
       i = 0;
       _results = [];
       while (i < nodes.length) {
@@ -62,6 +71,45 @@
     Nimbus.Auth.logout();
     $("body").toggleClass("slide_left");
     return $("#loginModal").addClass("active");
+  };
+
+  window.current_song = ["C3", "D3", "E3", "F3", "G3"];
+
+  window.construct_instruction = function(song) {
+    var a, counter, k, key, match, s, x, _i, _len, _results;
+    window.current = 0;
+    match = {
+      'C3': 'Do',
+      'D3': 'Re',
+      'E3': 'Me',
+      'F3': 'Fa',
+      'G3': 'So',
+      'A3': "La",
+      'B3': "Se",
+      "C3": "Do"
+    };
+    key = {
+      'C3': 'A',
+      'D3': 'S',
+      'E3': 'D',
+      'F3': 'F',
+      'G3': 'G',
+      'A3': "A",
+      'B3': "B",
+      "C3": "C"
+    };
+    counter = 0;
+    _results = [];
+    for (_i = 0, _len = song.length; _i < _len; _i++) {
+      a = song[_i];
+      x = match[a];
+      k = key[a];
+      s = "\"<div class=\"note\" id=\"n" + counter + "\"><span class=\"what\">" + x + "</span> <br /><span class=\"key\">" + k + "</span></div>";
+      console.log(s);
+      $("#instruction").append(s);
+      _results.push(counter = counter + 1);
+    }
+    return _results;
   };
 
 }).call(this);
