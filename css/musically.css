@@ -6,6 +6,12 @@
 	margin-left: 10px;
 }
 
+/*
+.done.note {
+	display: none;
+}
+*/
+
 .what {
 	font-size: 70px;
 	color: rgba(255,255,255,0.7);
