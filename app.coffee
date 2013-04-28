@@ -7,7 +7,7 @@ $ ->
     if Nimbus.Auth.authorized()
       $("#loginModal").removeClass("active")
 
-  window.construct_instruction(window.call_me_baby)
+  window.construct_instruction(window.current_song)
 
   settings =
     id: "keyboard"
@@ -69,12 +69,15 @@ window.log_out = ->
   $("body").toggleClass("slide_left")
   $("#loginModal").addClass("active")
   
-window.current_song = ["C3", "D3", "E3", "F3", "G3"]
-window.call_me_baby = ["B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", "B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", 
-  "B3", "B3", "B3", "B3", "B3", "A3", "A3", "break", "A3", "A3", "G3", "G3", "D4", "B3"]
+window.current_song = {"title": "Tutorial", "song":["C3", "D3", "E3", "F3", "G3"] }
+window.call_me_baby = {"title": "Call Me Maybe", "song":["B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", "B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", 
+  "B3", "B3", "B3", "B3", "B3", "A3", "A3", "break", "A3", "A3", "G3", "G3", "D4", "B3"]}
 
-window.construct_instruction = (song) ->
-  window.live = song
+window.construct_instruction = (total) ->
+  
+  $("#song_title").text(total.title)
+  
+  window.live = total.song
   window.current = 0
   window.current2 = 0
   match = 
@@ -84,7 +87,7 @@ window.construct_instruction = (song) ->
     'F3': 'Fa'
     'G3': 'So'
     'A3': "La"
-    'B3': "Se"
+    'B3': "Ti"
     "C4": "Do"   
     "D4": "Re"
     "E4": "Me"
@@ -106,7 +109,7 @@ window.construct_instruction = (song) ->
   counter = 0
   counter2 = 0
   
-  for a in song
+  for a in total.song
     console.log("a", a)
     if a is "break"
       $("#instruction").append("<div style= 'clear:both;'></div>")

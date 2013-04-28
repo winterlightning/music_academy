@@ -10,7 +10,7 @@
         return $("#loginModal").removeClass("active");
       }
     });
-    window.construct_instruction(window.call_me_baby);
+    window.construct_instruction(window.current_song);
     settings = {
       id: "keyboard",
       width: 900,
@@ -80,13 +80,20 @@
     return $("#loginModal").addClass("active");
   };
 
-  window.current_song = ["C3", "D3", "E3", "F3", "G3"];
+  window.current_song = {
+    "title": "Tutorial",
+    "song": ["C3", "D3", "E3", "F3", "G3"]
+  };
 
-  window.call_me_baby = ["B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", "B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", "B3", "B3", "B3", "B3", "B3", "A3", "A3", "break", "A3", "A3", "G3", "G3", "D4", "B3"];
+  window.call_me_baby = {
+    "title": "Call Me Maybe",
+    "song": ["B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", "B3", "B3", "B3", "B3", "B3", "A3", "B3", "break", "B3", "B3", "B3", "B3", "B3", "A3", "A3", "break", "A3", "A3", "G3", "G3", "D4", "B3"]
+  };
 
-  window.construct_instruction = function(song) {
-    var a, counter, counter2, k, key, match, s, x, _i, _len, _results;
-    window.live = song;
+  window.construct_instruction = function(total) {
+    var a, counter, counter2, k, key, match, s, x, _i, _len, _ref, _results;
+    $("#song_title").text(total.title);
+    window.live = total.song;
     window.current = 0;
     window.current2 = 0;
     match = {
@@ -96,7 +103,7 @@
       'F3': 'Fa',
       'G3': 'So',
       'A3': "La",
-      'B3': "Se",
+      'B3': "Ti",
       "C4": "Do",
       "D4": "Re",
       "E4": "Me",
@@ -117,9 +124,10 @@
     };
     counter = 0;
     counter2 = 0;
+    _ref = total.song;
     _results = [];
-    for (_i = 0, _len = song.length; _i < _len; _i++) {
-      a = song[_i];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      a = _ref[_i];
       console.log("a", a);
       if (a === "break") {
         $("#instruction").append("<div style= 'clear:both;'></div>");

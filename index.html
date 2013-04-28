@@ -123,9 +123,10 @@
   
 	<nav id="jPanelMenu-menu" style="width: 250px; z-index: 1; display: block; height: 100%">
 		<ul>
-			<li><input id="filter_search" type="search" placeholder="Filter"></li>
+			<!-- <li><input id="filter_search" type="search" placeholder="Filter"></li> -->
 			<li><a onclick="window.log_out()"><i class="icon-logout" style="font-size: 16px;"></i>Logout</a></li>
-			<li><a href="#usage"><i class="icon-arrows-ccw" style="font-size: 16px;"></i>Sync</a></li>
+			<li><a onclick="window.log_out()">Call Me Maybe</a></li>
+			<!-- <li><a href="#usage"><i class="icon-arrows-ccw" style="font-size: 16px;"></i>Sync</a></li> -->
 			<!-- <li><a href="#inner-workings">Filter</a></li> -->
 		</ul>
 	</nav>
@@ -136,34 +137,18 @@
 	    <i class="icon-menu" style="font-size: 25px;"></i> 
 	  </a>
 	  <h1 class="title">Musically</h1>
-
 	</header>
 
 	<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 	<div class="content" style="background-image: url('back.png'); background-size: cover; background-position: center center;">
 		
-		<div id="instruction" style="width: 600px; margin: 0px auto; display:block; margin-top: 200px;">
+		
+		<div id="instruction" style="width: 600px; margin: 0px auto; display:block; margin-top: 100px;">
+			<h1 id="song_title" style="color: rgba(255,255,255,0.7); font-weight: lighter; margin-left: 20px; margin-bottom: 10px;"></h1>
 		</div>
 		<nav class="bar-tab" style="height: 200px; width: 100%">
 			<div id="keyboard" style="background-color: #222; font-size: 0px; margin: 0px auto; text-align: center; "></div>
 		</nav>
-	</div>
-
-	<!-- modal for adding -->
-	<div id="addModal" class="modal">
-	  <header class="bar-title">
-		<a class="button" onclick="create_new_entry()" style="padding-top: 5px;">
-			<i class="icon-ok" style="font-size: 20px;"></i> 
-		</a>	  	
-	    <h1 class="title">Add Entry</h1>
-		<a class="button" href="#addModal" style="padding-top: 7px;">
-			<i class="icon-cancel-2" style="font-size: 20px;"></i> 
-		</a>
-	  </header>
-	  
-	  <div class="content">
-		
-	  </div>
 	</div>
 	
 
